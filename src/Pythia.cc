@@ -1326,9 +1326,9 @@ namespace Pythia8 {
 
 			bool noJpsi = true;
 
-      int noJpsicounter = 0;
+			int noJpsicounter = 0;
 			while (noJpsi) {
-        noJpsicounter++;
+				noJpsicounter++;
 				for (int iTry = 0; iTry < NTRY; ++iTry) {
 
 					info.addCounter(14);
@@ -1351,7 +1351,7 @@ namespace Pythia8 {
 					beamPomB.clear();
 					partonSystems.clear();
 
-					
+
 					// Parton-level evolution: ISR, FSR, MPI.
 					if ( !partonLevel.next( process, event) ) {
 
@@ -1461,14 +1461,21 @@ namespace Pythia8 {
 					break;
 				}
 
-        for (int i = 0; i < event.size(); ++i)
-          // if (event[i].isFinal() && event[i].id() > 400 && event[i].id() < 500 ) { 
-          if (event[i].isFinal() && event[i].id() > 400 && event[i].id() < 500 ) { 
-            cout << "num of tries " << noJpsicounter << endl; 
-             cout << i << " final " << event[i].isFinal() << " pdg " << event[i].id() <<  " name " << event[i].name() <<  " pT " << event[i].pT() <<  endl;
-             noJpsi = false ; 
-           }
+				for (int i = 0; i < event.size(); ++i)
+					// if (event[i].isFinal() && event[i].id() > 400 && event[i].id() < 500 ) {
+					if (event[i].isFinal() && event[i].id() > 400 && event[i].id() < 500 ) {
+						cout << "num of tries " << noJpsicounter << endl;
+						cout << i << " final " << event[i].isFinal() << " pdg " << event[i].id() <<  " name " << event[i].name() <<  " pT " << event[i].pT() <<  endl;
+						noJpsi = false ;
+					}
 			}
+
+			const double barnconv = 1. / 1000000000.;
+
+			// remove event weight by number of tries to get J/PSI
+			cout << "pythia::next setting weight " <<  1. / double(noJpsicounter) <<  endl;
+			info.setWeight( info.weight() * 1. / double(noJpsicounter)   * barnconv, 4) ;
+
 
 			// If event vetoed then to make a new try.
 			if (hasVetoed || hasVetoedDiff)  {
@@ -1510,10 +1517,6 @@ namespace Pythia8 {
 			event.list(showSaV, showMaD);
 		}
 
-    const double barnconv = 1/1000000000;
-
-    // remove event weight by number of tries to get J/PSI
-    info.setWeight( info.weight() 1/noJpsicounter  * barnconv, 4) ;
 
 		// Done.
 		info.addCounter(4);
