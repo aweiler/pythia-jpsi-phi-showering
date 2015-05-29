@@ -919,6 +919,7 @@ bool LHAupLHEF::setInitLHEF( istream & isIn, bool readHead ) {
 bool LHAupLHEF::setNewEventLHEF() {
 
   // Done if the reader finished preemptively.
+  cout << "922 LHAupLHEF::setNewEventLHEF() " << endl;
   if(!reader.readEvent()) return false;
 
   // Extract process info and store it.

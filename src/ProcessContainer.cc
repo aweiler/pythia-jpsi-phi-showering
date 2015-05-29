@@ -159,16 +159,17 @@ bool ProcessContainer::init(bool isFirst, Info* infoPtrIn,
 // Generate a trial event; selected or not.
 
 bool ProcessContainer::trialProcess() {
-
+  
   // Loop over tries only occurs for Les Houches strategy = +-2.
   for (int iTry = 0;  ; ++iTry) {
-
+    
     // Generate a trial phase space point, if meaningful.
     if (sigmaMx == 0.) return false;
     infoPtr->setEndOfFile(false);
     bool repeatSame = (iTry > 0);
+    cout << "170 ProcessContainer::trialProcess( ANDI " <<  endl;
     bool physical = phaseSpacePtr->trialKin(true, repeatSame);
-
+    cout << "171 ProcessContainer::trialProcess( ANDI " <<  endl;
     // Note if at end of Les Houches file, else do statistics.
     if (isLHA && !physical) infoPtr->setEndOfFile(true);
     else {
@@ -198,7 +199,7 @@ bool ProcessContainer::trialProcess() {
         }
       }
     }
-
+    cout << "201 ProcessContainer::trialProcess( ANDI " <<  endl;
     // Possibly fail, else cross section.
     if (!physical) return false;
     double sigmaNow = phaseSpacePtr->sigmaNow();

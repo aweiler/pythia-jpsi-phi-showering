@@ -359,7 +359,7 @@ bool ProcessLevel::next( Event& process) {
 // Generate (= read in) LHA input of resonance decay only.
 
 bool ProcessLevel::nextLHAdec( Event& process) {
-
+  cout << "ProcessLevel::nextLHAdec,  reading event?" << endl;
   // Read resonance decays from LHA interface.
   infoPtr->setEndOfFile(false);
   if (!lhaUpPtr->setEvent()) {
@@ -604,6 +604,8 @@ void ProcessLevel::resetStatistics() {
 bool ProcessLevel::nextOne( Event& process) {
 
   // Update CM energy for phase space selection.
+
+  cout << "608 ProcessLevel::nextOne( " << endl;
   double eCM = infoPtr->eCM();
   for (int i = 0; i < int(containerPtrs.size()); ++i)
     containerPtrs[i]->newECM(eCM);
@@ -617,32 +619,40 @@ bool ProcessLevel::nextOne( Event& process) {
     // Loop over tries until trial event succeeds.
     for ( ; ; ) {
 
+      
+
+
       // Pick one of the subprocesses.
       double sigmaMaxNow = sigmaMaxSum * rndmPtr->flat();
       int iMax = containerPtrs.size() - 1;
       iContainer = -1;
+      cout << "629 ProcessLevel::nextOne( "  << iContainer << endl;
       do sigmaMaxNow -= containerPtrs[++iContainer]->sigmaMax();
       while (sigmaMaxNow > 0. && iContainer < iMax);
-
       // Do a trial event of this subprocess; accept or not.
+      cout << "633 ProcessLevel::nextOne( " << iContainer <<  endl;
       if (containerPtrs[iContainer]->trialProcess()) break;
+      
 
       // Check for end-of-file condition for Les Houches events.
       if (infoPtr->atEndOfFile()) return false;
     }
 
+    cout << "639 ProcessLevel::nextOne( " << iContainer <<  endl;
     // Update sum of maxima if current maximum violated.
     if (containerPtrs[iContainer]->newSigmaMax()) {
       sigmaMaxSum = 0.;
       for (int i = 0; i < int(containerPtrs.size()); ++i)
         sigmaMaxSum += containerPtrs[i]->sigmaMax();
     }
+    
 
     // Construct kinematics of acceptable process.
     containerPtrs[iContainer]->constructState();
     if ( !containerPtrs[iContainer]->constructProcess( process) )
       physical = false;
 
+    
     // Do all resonance decays.
     if ( physical && doResDecays
       && !containerPtrs[iContainer]->decayResonances( process) )
@@ -662,7 +672,7 @@ bool ProcessLevel::nextOne( Event& process) {
     // Outer loop should normally work first time around.
     if (physical) break;
   }
-
+   
   // Done.
   return physical;
 }

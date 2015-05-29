@@ -230,6 +230,9 @@ void PartonLevel::resetTrial() {
 
 bool PartonLevel::next( Event& process, Event& event) {
 
+
+  // cout << "\n PartonLevel::next: now we are here " << endl;
+
   // Current event classification.
   isResolved     = infoPtr->isResolved();
   isResolvedA    = isResolved;

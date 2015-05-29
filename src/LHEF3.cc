@@ -647,6 +647,7 @@ bool Reader::init() {
 
 bool Reader::readEvent(HEPEUP * peup) {
 
+  cout << " Reader::readEvent " << endl; 
   HEPEUP & eup = (peup? *peup: hepeup);
   eup.clear();
   eup.heprup = &heprup;

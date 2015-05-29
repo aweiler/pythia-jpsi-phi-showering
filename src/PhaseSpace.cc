@@ -3937,11 +3937,11 @@ bool PhaseSpaceLHA::trialKin( bool, bool repeatSame ) {
     while (xMaxAbsRndm > 0. && iProc < nProc - 1);
     idProcNow = idProc[iProc];
   }
-
+  cout << "3940 PhaseSpaceLHA::trialKin " << endl;
   // Generate Les Houches event. Return if fail (= end of file).
   bool physical = lhaUpPtr->setEvent(idProcNow);
   if (!physical) return false;
-
+    cout << "3944 PhaseSpaceLHA::trialKin " << endl;
   // Find which process was generated.
   int    idPr = lhaUpPtr->idProcess();
   int    iProc = 0;

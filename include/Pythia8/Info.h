@@ -323,6 +323,10 @@ public:
   double tPomeronA()          const {return tPomA;}
   double tPomeronB()          const {return tPomB;}
 
+  // Set event weight; currently only for Les Houches description.
+  void setWeight( double weightIn, int lhaStrategyIn) {
+    weightSave = weightIn; lhaStrategySave = lhaStrategyIn; }
+
 private:
 
   // Number of times the same error message is repeated, unless overridden.
@@ -500,9 +504,7 @@ private:
   // Set info whether reading of Les Houches Accord file at end.
   void setEndOfFile( bool atEOFin) {atEOF = atEOFin;}
 
-  // Set event weight; currently only for Les Houches description.
-  void setWeight( double weightIn, int lhaStrategyIn) {
-    weightSave = weightIn; lhaStrategySave = lhaStrategyIn; }
+  
 
   // Save merging weight (i.e.  CKKW-L-type weight, summed O(\alpha_s) weight)
   double weightCKKWLSave, weightFIRSTSave;
