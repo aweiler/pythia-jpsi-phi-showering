@@ -1510,6 +1510,11 @@ namespace Pythia8 {
 			event.list(showSaV, showMaD);
 		}
 
+    const double barnconv = 1/1000000000;
+
+    // remove event weight by number of tries to get J/PSI
+    info.setWeight( info.weight() 1/noJpsicounter  * barnconv, 4) ;
+
 		// Done.
 		info.addCounter(4);
 		return true;
