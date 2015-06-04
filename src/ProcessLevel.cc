@@ -359,7 +359,7 @@ bool ProcessLevel::next( Event& process) {
 // Generate (= read in) LHA input of resonance decay only.
 
 bool ProcessLevel::nextLHAdec( Event& process) {
-  cout << "ProcessLevel::nextLHAdec,  reading event?" << endl;
+  // // cout << "ProcessLevel::nextLHAdec,  reading event?" << endl;
   // Read resonance decays from LHA interface.
   infoPtr->setEndOfFile(false);
   if (!lhaUpPtr->setEvent()) {
@@ -605,7 +605,7 @@ bool ProcessLevel::nextOne( Event& process) {
 
   // Update CM energy for phase space selection.
 
-  cout << "608 ProcessLevel::nextOne( " << endl;
+  // cout << "608 ProcessLevel::nextOne( " << endl;
   double eCM = infoPtr->eCM();
   for (int i = 0; i < int(containerPtrs.size()); ++i)
     containerPtrs[i]->newECM(eCM);
@@ -626,11 +626,11 @@ bool ProcessLevel::nextOne( Event& process) {
       double sigmaMaxNow = sigmaMaxSum * rndmPtr->flat();
       int iMax = containerPtrs.size() - 1;
       iContainer = -1;
-      cout << "629 ProcessLevel::nextOne( "  << iContainer << endl;
+      // cout << "629 ProcessLevel::nextOne( "  << iContainer << endl;
       do sigmaMaxNow -= containerPtrs[++iContainer]->sigmaMax();
       while (sigmaMaxNow > 0. && iContainer < iMax);
       // Do a trial event of this subprocess; accept or not.
-      cout << "633 ProcessLevel::nextOne( " << iContainer <<  endl;
+      // cout << "633 ProcessLevel::nextOne( " << iContainer <<  endl;
       if (containerPtrs[iContainer]->trialProcess()) break;
       
 
@@ -638,7 +638,7 @@ bool ProcessLevel::nextOne( Event& process) {
       if (infoPtr->atEndOfFile()) return false;
     }
 
-    cout << "639 ProcessLevel::nextOne( " << iContainer <<  endl;
+    // cout << "639 ProcessLevel::nextOne( " << iContainer <<  endl;
     // Update sum of maxima if current maximum violated.
     if (containerPtrs[iContainer]->newSigmaMax()) {
       sigmaMaxSum = 0.;

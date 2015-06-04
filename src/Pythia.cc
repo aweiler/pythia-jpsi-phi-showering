@@ -1157,12 +1157,12 @@ namespace Pythia8 {
 			info.setCounter(i);
 		}
 
-		cout << "ANDI Pythia::next()  " << doProcessLevel << " " << doLHA << endl;
+		//cout << "ANDI Pythia::next()  " << doProcessLevel << " " << doLHA << endl;
 
 		// Simpler option when no hard process, i.e. mainly hadron level.
 		if (!doProcessLevel) {
 
-			cout << "\n ANDI Pythia::next(): " << doProcessLevel << " ?" << endl;
+			//cout << "\n ANDI Pythia::next(): " << doProcessLevel << " ?" << endl;
 
 			// Optionally fetch in resonance decays from LHA interface.
 			if (doLHA && !processLevel.nextLHAdec( event)) {
@@ -1194,7 +1194,7 @@ namespace Pythia8 {
 			return status;
 		}
 
-		cout << "\n ANDI Pythia::next(): reset arrays " << endl;
+		//cout << "\n ANDI Pythia::next(): reset arrays " << endl;
 		// Reset arrays.
 		info.clear();
 		process.clear();
@@ -1233,7 +1233,7 @@ namespace Pythia8 {
 		// Outer loop over hard processes; only relevant for user-set vetoes.
 		for ( ; ; ) {
 
-			cout << "\n ANDI Pythia::next():Outer loop over hard processes " << endl;
+			//cout << "\n ANDI Pythia::next():Outer loop over hard processes " << endl;
 			info.addCounter(10);
 			bool hasVetoed = false;
 			bool hasVetoedDiff = false;
@@ -1242,14 +1242,14 @@ namespace Pythia8 {
 			info.clear();
 			process.clear();
 
-			cout << "1100 Pythia::next before rocessLevel.next( process)" << endl;
+			//cout << "1100 Pythia::next before rocessLevel.next( process)" << endl;
 
 			/// This is were we read the event
 
 			if ( !processLevel.next( process) ) {
 
 
-				cout << "1107 ANDI Pythia::next(): if ( !processLevel.next( process) ) " << endl;
+				//cout << "1107 ANDI Pythia::next(): if ( !processLevel.next( process) ) " << endl;
 
 				if (doLHA && info.atEndOfFile()) info.errorMsg("Abort from "
 							"Pythia::next: reached end of Les Houches Events File");
@@ -1258,7 +1258,7 @@ namespace Pythia8 {
 				return false;
 			}
 
-			cout << "1116 Pythia::next(): processLevel.next( process) " << endl;
+			//cout << "1116 Pythia::next(): processLevel.next( process) " << endl;
 
 			info.addCounter(11);
 

@@ -167,9 +167,9 @@ bool ProcessContainer::trialProcess() {
     if (sigmaMx == 0.) return false;
     infoPtr->setEndOfFile(false);
     bool repeatSame = (iTry > 0);
-    cout << "170 ProcessContainer::trialProcess( ANDI " <<  endl;
+    // cout << "170 ProcessContainer::trialProcess( ANDI " <<  endl;
     bool physical = phaseSpacePtr->trialKin(true, repeatSame);
-    cout << "171 ProcessContainer::trialProcess( ANDI " <<  endl;
+    // cout << "171 ProcessContainer::trialProcess( ANDI " <<  endl;
     // Note if at end of Les Houches file, else do statistics.
     if (isLHA && !physical) infoPtr->setEndOfFile(true);
     else {
@@ -199,7 +199,7 @@ bool ProcessContainer::trialProcess() {
         }
       }
     }
-    cout << "201 ProcessContainer::trialProcess( ANDI " <<  endl;
+    // cout << "201 ProcessContainer::trialProcess( ANDI " <<  endl;
     // Possibly fail, else cross section.
     if (!physical) return false;
     double sigmaNow = phaseSpacePtr->sigmaNow();
