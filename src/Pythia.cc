@@ -4,7 +4,6 @@
 // Please respect the MCnet Guidelines, see GUIDELINES for details.
 
 // Function definitions (not found in the header) for the Pythia class.
-
 #include "Pythia8/Pythia.h"
 
 // Access time information.
@@ -1459,14 +1458,14 @@ namespace Pythia8 {
 					// Stop parton- and hadron-level looping if you got this far.
 					info.addCounter(18);
 					break;
-				}
-
+				const double jpsiMinPT = 10.;
 				for (int i = 0; i < event.size(); ++i)
 					// if (event[i].isFinal() && event[i].id() > 400 && event[i].id() < 500 ) {
 					if (event[i].isFinal() && event[i].id() > 400 && event[i].id() < 500 ) {
 						cout << "num of tries " << noJpsicounter << endl;
 						cout << i << " final " << event[i].isFinal() << " pdg " << event[i].id() <<  " name " << event[i].name() <<  " pT " << event[i].pT() <<  endl;
-						noJpsi = false ;
+						if( event[i].pT() > jpsiMinPT)
+							noJpsi = false ;
 					}
 			}
 
